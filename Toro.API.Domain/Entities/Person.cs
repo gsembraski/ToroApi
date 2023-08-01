@@ -16,9 +16,23 @@ public class Person : Entity<ObjectId>
         Birth = birth;
         AccountNumber = accountNumber;
     }
+    public Person(ObjectId id,string name, string cpf, DateTime birth, string accountNumber)
+    {
+        Id = id;
+        Name = name;
+        CPF = cpf;
+        Birth = birth;
+        AccountNumber = accountNumber;
+    }
 
     public string Name { get; private set; }
     public string CPF { get; private set; }
     public string AccountNumber { get; private set; }
     public DateTime Birth { get; private set; }
+
+    public void UpdateInfo(string name, string accountNumber)
+    {
+        Name = name;
+        AccountNumber = accountNumber;
+    }
 }

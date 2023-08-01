@@ -2,8 +2,8 @@
 using System;
 using Toro.API.Domain.Resources.Result;
 
-namespace Toro.API.Domain.Commands.User;
-public record CreateUserCommand : IRequest<GenericCommandResult>
+namespace Toro.API.Domain.Commands.Person;
+public record CreatePersonCommand : IRequest<GenericCommandResult>
 {
     public string Name { get; set; }
     public string Email { get; set; }

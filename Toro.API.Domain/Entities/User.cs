@@ -15,6 +15,13 @@ public class User : Entity<ObjectId>
         Password = password;
         Person = person;
     }
+    public User(ObjectId id,string email, string password, PersonUser person)
+    {
+        Id = id;
+        Email = email;
+        Password = password;
+        Person = person;
+    }
 
     public string Email { get; private set; }
     public string Password { get; private set; }
@@ -23,8 +30,17 @@ public class User : Entity<ObjectId>
 
 public struct PersonUser
 {
-    public ObjectId Id { get; set; }
-    public string Name { get; set; }
-    public string CPF { get; set; }
-    public string AccountNumber { get; set; }
+    public PersonUser() { }
+    public PersonUser(ObjectId id = default, string name = null, string cPF = null, string accountNumber = null)
+    {
+        Id = id;
+        Name = name;
+        CPF = cPF;
+        AccountNumber = accountNumber;
+    }
+
+    public ObjectId Id { get; private set; }
+    public string Name { get; private set; }
+    public string CPF { get; private set; }
+    public string AccountNumber { get; private set; }
 }

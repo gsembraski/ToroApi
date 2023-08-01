@@ -10,17 +10,13 @@ namespace Toro.API.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController : ControllerBaseApi<UserController>
+    public class UserController : ControllerBaseApi<PersonController>
     {
-        public UserController(ILogger<UserController> logger, IMediator mediator, IDomainNotificationContext domainNotificationContext) :base(logger, mediator, domainNotificationContext) { }
-       
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] CreateUserCommand command) => await TrySendCommand(command);
+        public UserController(ILogger<PersonController> logger, IMediator mediator, IDomainNotificationContext domainNotificationContext) : base(logger, mediator, domainNotificationContext) { }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
-        public async Task<IActionResult> AuthenticateAsync([FromBody] AuthUserCommand command,
+        [HttpPost("auth")]
+        public async Task<IActionResult> PostAsync([FromBody] AuthUserCommand command,
            [FromServices] SigningCredentials signingConfigurations) => await TrySendCommand(command.SetAuthConfigs(signingConfigurations));
     }
 }

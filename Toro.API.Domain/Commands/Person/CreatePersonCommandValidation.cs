@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using Toro.API.Domain.Resources.Result;
 
-namespace Toro.API.Domain.Commands.User;
+namespace Toro.API.Domain.Commands.Person;
 
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class CreateUserCommandValidator : AbstractValidator<CreatePersonCommand>
 {
     public CreateUserCommandValidator()
     {
