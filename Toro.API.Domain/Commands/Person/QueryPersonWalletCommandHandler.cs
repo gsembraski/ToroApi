@@ -39,7 +39,7 @@ public class QueryPersonWalletCommandHandler : IRequestHandler<QueryPersonWallet
             return new GenericCommandResult(false);
         }
 
-        return new GenericCommandResult(true, ResourceMessage.SuccessCreateItem, person);
+        return new GenericCommandResult(true, ResourceMessage.Success, person);
     }
 }
 

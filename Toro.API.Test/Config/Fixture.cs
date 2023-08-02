@@ -28,6 +28,7 @@ public class TestFixture : WebApplicationFactory<Program>, IDisposable
         builder.ConfigureServices(services =>
         {
             services.AddTransient<IUserRepository, UserRepositoryMock>();
+            services.AddTransient<IPersonRepository, PersonRepositoryMock>();
         });
 
         // Call the base configuration

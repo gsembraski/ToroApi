@@ -9,8 +9,9 @@ namespace Toro.API.Domain.Entities;
 public class Asset : Entity<ObjectId>
 {
     public Asset() { }
-    public Asset(string name, string code, string value)
+    public Asset(ObjectId id,string name, string code, decimal value)
     {
+        Id = id;
         Name = name;
         Code = code;
         Value = value;
@@ -18,5 +19,5 @@ public class Asset : Entity<ObjectId>
 
     public string Name { get; private set; }
     public string Code { get; private set; }
-    public string Value { get; private set; }
+    public decimal Value { get; private set; }
 }

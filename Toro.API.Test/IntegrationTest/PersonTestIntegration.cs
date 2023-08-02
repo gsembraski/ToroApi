@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
+using Toro.API.Domain.Models;
 using Toro.API.Domain.Resources.Result;
 using Toro.API.Test.Config;
 using Toro.API.Test.Helpers;
@@ -24,7 +26,7 @@ namespace Toro.API.Test.UnitTest
         public async Task Create_OK()
         {
             //Arr
-            string jsonContent = "{\"name\": \"Novo Usuário\",\"email\": \"novo@test.com\",\"password\": \"12345678\",\"cpf\": \"66490365014\",\"birth\": \"1993-08-01T20:19:16.355Z\"}";
+            string jsonContent = "{\"name\": \"Novo Usuário\",\"email\": \"novo@test.com\",\"password\": \"12345678\",\"cpf\": \"66490365014\",\"birth\": \"1993-08-01T20:19:16.355Z\",\"wallet\": { \"balance\": 0, \"assets\": [   {     \"code\": \"string\",     \"name\": \"string\",     \"amount\": 0   } ]  }}";
             var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
 
             // Act
@@ -62,23 +64,23 @@ namespace Toro.API.Test.UnitTest
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
-        //[Fact]
-        //public async Task AuthAsync_NOK()
-        //{
-        //    //Arr
-        //    var contentAuth = new StringContent("{\"email\":\"geovana.nocera@gmail.com\",\"password\":\"12345678\"}", System.Text.Encoding.UTF8, "application/json");
-        //    var responseAuth = await client.PostAsync("/api/user/auth", contentAuth).ConfigureAwait(false);
-        //    var result = responseAuth.Content.ReadFromJsonAsync<OkRequestResult>().Result;
-        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result!.Data.ToString());
+        [Fact]
+        public async Task GetAsync_OK()
+        {
+            //Arr
+            var contentAuth = new StringContent("{\"email\":\"geovana.nocera@gmail.com\",\"password\":\"12345678\"}", System.Text.Encoding.UTF8, "application/json");
+            var responseAuth = await client.PostAsync("/api/user/auth", contentAuth).ConfigureAwait(false);
+            var result = responseAuth.Content.ReadFromJsonAsync<OkRequestResult>().Result;
+            var token = JsonSerializer.Serialize(result!.Data);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.Replace("\"", ""));
 
-        //    string jsonContent = "{\"name\": \"Novo Usuário\",\"email\": \"novo@test.com\",\"password\": \"12345678\",\"cpf\": \"66490365014\",\"birth\": \"1993-08-01T20:19:16.355Z\"}";
-        //    var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+            // Act
+            var response = await client.GetAsync("/api/person/wallet").ConfigureAwait(false);
+            var resultQuery = response.Content.ReadFromJsonAsync<OkRequestResult>().Result;
 
-        //    // Act
-        //    var response = await client.PostAsync("/api/person", contentAuth).ConfigureAwait(false);
-
-        //    //Act
-        //    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        //}
+            //Act
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.NotNull(resultQuery.Data);
+        }
     }
 }

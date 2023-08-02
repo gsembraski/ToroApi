@@ -19,13 +19,14 @@ public class Person : Entity<ObjectId>
         AccountNumber = accountNumber;
         Wallet = wallet;
     }
-    public Person(ObjectId id,string name, string cpf, DateTime birth, string accountNumber)
+    public Person(ObjectId id,string name, string cpf, DateTime birth, string accountNumber, PersonWallet wallet)
     {
         Id = id;
         Name = name;
         CPF = cpf;
         Birth = birth;
         AccountNumber = accountNumber;
+        Wallet = wallet;
     }
 
     public string Name { get; private set; }

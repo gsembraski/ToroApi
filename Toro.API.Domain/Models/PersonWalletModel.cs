@@ -14,7 +14,7 @@ public class PersonWalletModel
     {
         get
         {
-            return this.Balance + this.Assets.Sum(x => x.Value);
+            return this.Balance + this.Assets.Sum(x => x.Value * x.Amount);
         }
     }
 }
@@ -23,6 +23,6 @@ public record AssetModel
 {
     public string Code { get; set; }
     public string Name { get; set; }
-    public Int16 Amount { get; set; }
+    public Int32 Amount { get; set; }
     public decimal Value { get; set; }
 }
