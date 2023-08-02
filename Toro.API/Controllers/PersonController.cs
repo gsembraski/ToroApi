@@ -17,5 +17,8 @@ namespace Toro.API.Controllers
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] CreatePersonCommand command) => await TrySendCommand(command);
+
+        [HttpGet("wallet")]
+        public async Task<IActionResult> GetAsync() => await TrySendCommand(new QueryPersonWalletCommand());
     }
 }

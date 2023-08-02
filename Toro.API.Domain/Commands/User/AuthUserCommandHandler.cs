@@ -43,7 +43,7 @@ public class AuthUserCommandHandler : IRequestHandler<AuthUserCommand, GenericCo
             {
                 new Claim("UID", user.Email),
                 new Claim("UN", user.Person.Name),
-                new Claim("UUID", user.Id.AsGuid().ToString())
+                new Claim("UUID", user.Person.Id.AsGuid().ToString())
             })
         };
 

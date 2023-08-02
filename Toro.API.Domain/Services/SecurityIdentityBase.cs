@@ -18,6 +18,7 @@ namespace Toro.API.Domain.Services
     public class CustomIdentity
     {
         public ObjectId Id { get; set; }
+        public string CPF { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
     }

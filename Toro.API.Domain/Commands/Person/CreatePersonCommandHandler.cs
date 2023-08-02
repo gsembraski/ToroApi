@@ -1,14 +1,12 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Toro.API.Domain.Entities;
 using Toro.API.Domain.Repositories;
-using Toro.API.Domain.Resources;
-using Toro.API.Domain.Resources.Notification;
 using Toro.API.Domain.Resources.Extensions;
+using Toro.API.Domain.Resources.Notification;
 using Toro.API.Domain.Resources.Result;
 
 namespace Toro.API.Domain.Commands.Person;
@@ -45,7 +43,12 @@ public class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, G
             return new GenericCommandResult(false);
         }
 
-        person = new Entities.Person(request.Name, request.CPF, request.Birth, DateTime.UtcNow.Ticks.ToString());
+        person = new Entities.Person(
+            request.Name, 
+            request.CPF, 
+            request.Birth, 
+            DateTime.UtcNow.Ticks.ToString(), 
+            new PersonWallet(request.Wallet.Balance, request.Wallet.Assets.Select(x => new PersonAsset(x.Code, x.Name, x.Amount))));
         await _personRepository.InsertOneAsync(person);
 
         user = new Entities.User(request.Email, request.Password.EncryptMD5(), new Entities.PersonUser(
@@ -66,4 +69,3 @@ public class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, G
         });
     }
 }
-

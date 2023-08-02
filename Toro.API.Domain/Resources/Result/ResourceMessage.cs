@@ -9,6 +9,7 @@ namespace Toro.API.Domain.Resources.Result;
 public static class ResourceMessage
 {
     // general
+    public const string Error = "Erro: Houve um erro inesperado, contante o administrador do sistema.";
     public const string ErrorRequired = "Erro {PropertyName}: O campo é obrigatório.";
     public const string ErrorMinLength = "Erro {PropertyName}: O quantidade minima de caracteres não foi atingida.";
     public const string ErrorMaxLength = "Erro {PropertyName}: O quantidade maxima de caracteres foi atingida.";
