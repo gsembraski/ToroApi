@@ -6,17 +6,14 @@ using Toro.API.Domain.Resources;
 
 namespace Toro.API.Controllers.Base
 {
-    public abstract class ControllerBaseApi<T> : ControllerBase
+    public abstract class ControllerBaseApi : ControllerBase
     {
-        public readonly ILogger<T> _logger;
-
         public readonly IMediator _mediator;
 
         public readonly IDomainNotificationContext _domainNotificationContext;
 
-        protected ControllerBaseApi(ILogger<T> logger, IMediator mediator, IDomainNotificationContext domainNotificationContext)
+        protected ControllerBaseApi(IMediator mediator, IDomainNotificationContext domainNotificationContext)
         {
-            _logger = logger;
             _mediator = mediator;
             _domainNotificationContext = domainNotificationContext;
         }

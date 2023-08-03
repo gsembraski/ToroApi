@@ -10,9 +10,9 @@ namespace Toro.API.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController : ControllerBaseApi<PersonController>
+    public class UserController : ControllerBaseApi
     {
-        public UserController(ILogger<PersonController> logger, IMediator mediator, IDomainNotificationContext domainNotificationContext) : base(logger, mediator, domainNotificationContext) { }
+        public UserController(IMediator mediator, IDomainNotificationContext domainNotificationContext) : base(mediator, domainNotificationContext) { }
 
         [AllowAnonymous]
         [HttpPost("auth")]
