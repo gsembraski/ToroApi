@@ -4,8 +4,6 @@ namespace Toro.API.Domain.Entities.Base
 {
     public abstract class Entity<TId>
     {
-        private int? _requestedHashCode;
-
         private TId _Id;
 
         [BsonId]
